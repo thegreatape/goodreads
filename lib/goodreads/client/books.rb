@@ -31,5 +31,11 @@ module Goodreads
     def book_by_title(title)
       Hashie::Mash.new(request("/book/title", title: title)["book"])
     end
+    
+    # Get pagingated book list details by author id
+    #
+    def books_by_author(author_id, opts={})
+      Hashie::Mash.new(request('/author/list', {:id => author_id}.merge(opts)))['author']['books']
+    end
   end
 end
